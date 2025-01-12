@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manhwa - Manhware</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- pastikan file styles.css berada di folder public -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="bg-dark text-white py-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="logo">
+                <h1 class="h3"><a href="/" class="text-white" style="text-decoration: none;">Manhware</a></h1> <!-- Nama Website dengan link ke index -->
+            </div>
+            <nav>
+                <ul class="nav">
+                    <% if (user) { %>
+                        <!-- Jika user login, tampilkan nama user dan tombol logout -->
+                        <li class="nav-item"><span class="nav-link text-white">Welcome, <a href="/dashboard"><%= user.username %></a></span></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="/api/logout">Logout</a></li>
+                    <% } else { %>
+                        <!-- Jika user belum login, tampilkan tombol login dan register -->
+                        <li class="nav-item"><a class="nav-link text-white" href="/login">Login</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="/register">Register</a></li>
+                    <% } %>
+                    <!-- Form Pencarian -->
+                    <form action="/search" method="get" class="d-flex">
+                        <input type="text" name="query" class="form-control me-2" placeholder="Search manga...">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </form>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Sidebar Section -->
+            <div class="col-md-3">
+                <h4 class="text-center mb-4">Menu</h4>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <a href="/manhwa" class="btn btn-outline-dark w-100">Manhwa</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/anime" class="btn btn-outline-dark w-100">Anime</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Main Content Section -->
+            <div class="col-md-9">
+                <!-- Admin Upload Section -->
+                <% if (user && user.username === 'admin') { %>
+                    <section class="admin-upload mt-5">
+                        <div class="card shadow-sm" style="max-width: 400px; margin: 0 auto;">
+                            <div class="card-header text-center bg-success text-white">
+                                <h5>Upload New Manhwa</h5>
+                            </div>
+                            <div class="card-body">
+                                <form action="/upload/manhwa" method="POST" enctype="multipart/form-data">
+                                    <div class="mb-3">
+                                        <input type="text" name="folderName" class="form-control form-control-sm" placeholder="Folder name" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <input type="file" name="file" class="form-control form-control-sm" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-success btn-sm w-100">Upload</button>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                <% } %>
+
+                <!-- Featured Manhwa Section -->
+                <section class="featured mt-5">
+                    <h2 class="text-center mb-4">Featured Manhwa</h2>
+                    <div class="row">
+                        <% if (featuredManhwa && featuredManhwa.length > 0) { %>
+                            <% featuredManhwa.forEach(function(manhwa) { %>
+                                <div class="col-md-4 mb-4">
+                                    <div class="card">
+                                        <img src="<%= manhwa.image %>" class="card-img-top" alt="<%= manhwa.title %>">
+                                        <div class="card-body">
+                                            <p class="card-text text-center"><%= manhwa.title %></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% }); %>
+                        <% } else { %>
+                            <p class="text-center">No featured manhwa available at the moment.</p>
+                        <% } %>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-dark text-white py-3 mt-5">
+        <div class="container text-center">
+            <p>&copy; 2024 Manhware. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="/js/script.js"></script> <!-- pastikan script.js berada di folder public/js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

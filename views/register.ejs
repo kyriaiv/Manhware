@@ -1,0 +1,67 @@
+<!-- Main Content Section -->
+<div class="container mt-5">
+    <div class="row">
+        <!-- Form Pendaftaran -->
+        <div class="col-md-4">
+            <div class="register-form">
+                <h4 class="text-center mb-4">Register</h4>
+
+                <!-- Menampilkan pesan error atau sukses -->
+                <% if (message) { %>
+                    <div class="alert alert-danger">
+                        <%= message %>
+                    </div>
+                <% } %>
+
+                <form action="/api/users" method="POST">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" name="username" id="username" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" name="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" name="password" id="password" class="form-control" required>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary w-100">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Featured Manga -->
+        <div class="col-md-8">
+            <h4 class="text-center mb-4">Featured Manga</h4>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card manga-card">
+                        <img src="/images/one_piece.jpg" class="card-img-top" alt="One Piece">
+                        <div class="card-body">
+                            <p class="card-text text-center">One Piece</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card manga-card">
+                        <img src="/images/naruto.jpg" class="card-img-top" alt="Naruto">
+                        <div class="card-body">
+                            <p class="card-text text-center">Naruto</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card manga-card">
+                        <img src="/images/attack_on_titan.jpg" class="card-img-top" alt="Attack on Titan">
+                        <div class="card-body">
+                            <p class="card-text text-center">Attack on Titan</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

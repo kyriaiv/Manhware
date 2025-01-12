@@ -1,0 +1,63 @@
+<!-- Main Content Section -->
+<div class="container mt-5">
+    <div class="row">
+        <!-- Sidebar Section -->
+        <div class="col-md-3">
+            <h4 class="text-center">Login</h4>
+            
+            <!-- Pesan Error -->
+            <% if (message) { %>
+                <div class="alert alert-danger text-center"><%= message %></div>
+                <% if (redirectToRegister) { %>
+                    <div class="text-center mt-3">
+                        <a href="/register" class="btn btn-primary">Go to Register</a>
+                    </div>
+                <% } %>
+            <% } %>
+
+            <!-- Form Login -->
+            <form action="/api/login" method="POST">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" name="username" id="username" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+            </form>
+        </div>
+
+        <!-- Manga Listings Section -->
+        <div class="col-md-9">
+            <h2 class="text-center mb-4">Featured Manga</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="/images/one_piece.jpg" class="card-img-top" alt="One Piece">
+                        <div class="card-body">
+                            <p class="card-text text-center">One Piece</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="/images/naruto.jpg" class="card-img-top" alt="Naruto">
+                        <div class="card-body">
+                            <p class="card-text text-center">Naruto</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="/images/attack_on_titan.jpg" class="card-img-top" alt="Attack on Titan">
+                        <div class="card-body">
+                            <p class="card-text text-center">Attack on Titan</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
